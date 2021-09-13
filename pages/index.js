@@ -1,82 +1,71 @@
 import Head from 'next/head'
-
+import React, { useState } from 'react'
 export default function Home() {
+  const [sorted,set_data] = useState([]);
+  function Handler(event){
+    event.preventDefault();
+    
+    const save_data={
+      location:event.target.location.value,
+      min_customers:event.target.min.value,
+      max_customers:event.target.max.value,
+      avg_cookies:event.target.avg.value,
+      
+    }
+    set_data (sorted=> [...sorted, save_data])
+    // console.log("🚀 ~ file: index.js ~ line 16 ~ Handler ~ set_data(save_data)", set_data(save_data))
+    // console.log("🚀 ~ file: index.js ~ line 5 ~ Home ~ sorted", sorted)
+    
+  }
+  console.log("🚀 ~ file: index.js ~ line 5 ~ Home ~ sorted", sorted, '*************')
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
-
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">
-            pages/index.js
-          </code>
-        </p>
-
-        <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+    <div className="">
+      <head>
+        <title>Cookie Stand Admin</title>
+      </head>
+      <body  className="bg-green-50"> 
+      <header className="flex justify-between p-6 bg-green-500">
+        <p  className='text-3xl'>
+      Cookie Stand Admin
+      </p>
+      </header>
+      <main className="">
+      <form className="flex-col w-2/3 p-2 mx-auto my-7 bg-green-300 rounded-md " onSubmit={Handler}>
+        <h1 className='my-6 text-2xl text-center'>Create Cookie Stand</h1>
+        <div className="flex " >
+          <label className="mx-1" >Location</label>
+          <input name="location" className="flex-auto"/>
         </div>
+        <div className="flex w-3.5/4 mx-auto my-5">
+          <div className="flex-col w-1/4">
+            <label>Minimum Customers per hour</label>
+            <input type='number' name="min" className=""/>
+          </div>
+          <div className="flex-col w-1/4">
+            <label>Maximum Customers per hour</label>
+            <input type='number' name="max" className=""/>
+          </div>
+          <div className="flex-col w-1/4">
+            <label>Average Cookies per Sale</label>
+            <input type='number' name="avg" className=""/>
+          </div>
+          <button className="w-1/4 bg-green-500 ">Create</button>      
+        </div>   
+      </form>
+      <p className='my-3 text-center text-gray-600 text-1xl'>
+        Report Table Coming Soon...
+      </p>
+          {sorted.map((i)=>
+      <p className='my-3 text-center text-gray-600 text-1xl'>
+        {JSON.stringify(i)}
+      </p>
+          )
+}
       </main>
-
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
-        </a>
+      <footer className="flex justify-between p-4 bg-green-500">
+      &copy;2021
       </footer>
+      </body>
     </div>
   )
 }
