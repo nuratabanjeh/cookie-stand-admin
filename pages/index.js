@@ -10,7 +10,7 @@ export default function Home() {
       min_customers:event.target.min.value,
       max_customers:event.target.max.value,
       avg_cookies:event.target.avg.value,
-      
+      counter: sorted.length + 1,
     }
     set_data (sorted=> [...sorted, save_data])
     // console.log("🚀 ~ file: index.js ~ line 16 ~ Handler ~ set_data(save_data)", set_data(save_data))
@@ -18,6 +18,7 @@ export default function Home() {
     
   }
   console.log("🚀 ~ file: index.js ~ line 5 ~ Home ~ sorted", sorted, '*************')
+  console.log("🚀 ~ file: index.js ~ line 69 ~ Home ~ sorted", sorted, "mhmouuudd")
   return (
     <div className="">
       <head>
@@ -52,18 +53,40 @@ export default function Home() {
           <button className="w-1/4 bg-green-500 ">Create</button>      
         </div>   
       </form>
-      <p className='my-3 text-center text-gray-600 text-1xl'>
-        Report Table Coming Soon...
-      </p>
-          {sorted.map((i)=>
-      <p className='my-3 text-center text-gray-600 text-1xl'>
-        {JSON.stringify(i)}
-      </p>
-          )
-}
+      {sorted.length ?
+      <table className="w-1/2 mx-auto my-4">
+          <thead>
+            <tr>
+              <th className="">location</th>
+              <th className="">minCustomers</th>
+              <th className="">maxCustomers</th>
+              <th className="">Average</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sorted.map((i) => (
+              <tr>
+                <td className="pl-2 border">
+                  {i.location}
+                </td>
+                <td className="pl-2 border">
+                  {i.min_customers}
+                </td>
+                <td className="pl-2 border">
+                  {i.max_customers}
+                </td>
+                <td className="pl-2 border">
+                  {i.avg_cookies}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table> :
+         <p className="text-center">No Cookies Stands Available</p>
+        }
       </main>
       <footer className="flex justify-between p-4 bg-green-500">
-      &copy;2021
+      <p>{`${sorted.length} locations world wild`}</p>
       </footer>
       </body>
     </div>
